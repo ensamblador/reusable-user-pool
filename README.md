@@ -1,5 +1,5 @@
 
-# Simple ECS Cluster Stack
+# Cognito user pool reutilizable
 
 Este proyecto crea los siguientes recursos dentro de una región de AWS:
 
