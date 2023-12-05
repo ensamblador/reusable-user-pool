@@ -1,58 +1,70 @@
 
-# Welcome to your CDK Python project!
+# Simple ECS Cluster Stack
 
-This is a blank project for CDK development with Python.
+Este proyecto crea los siguientes recursos dentro de una región de AWS:
 
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
+* 1 User Pool
+* Cognito domain 
+* Usuarios por defecto (definidos en parameter store)
+* Parámetros creados:
+    * pool-id
+    * custom-domain
 
-This project is set up like a standard Python project.  The initialization
-process also creates a virtualenv within this project, stored under the `.venv`
-directory.  To create the virtualenv it assumes that there is a `python3`
-(or `python` for Windows) executable in your path with access to the `venv`
-package. If for any reason the automatic creation of the virtualenv fails,
-you can create the virtualenv manually.
 
-To manually create a virtualenv on MacOS and Linux:
+La idea de este proyecto es contar con un pool de usuario para diferentes proyectos futuros. Solo agregndo nuevas apps (app id / app secret)
 
+
+
+![user pool](/user-pool.jpg)
+
+El codigo de la infra está en [`user_pool_stack.py`](user_pool/user_pool_stack.py)
+
+
+
+## Instrucciones para despliegue
+
+
+Clonar y crear un ambiente virtual python para el proyecto
+
+```zsh
+git clone https://github.com/ensamblador/reusable-user-pool.git
+cd reusable-user-pool
+python3 -m venv .venv
 ```
-$ python3 -m venv .venv
+
+En linux o macos el ambiente se activa así:
+
+```zsh
+source .venv/bin/activate
 ```
 
-After the init process completes and the virtualenv is created, you can use the following
-step to activate your virtualenv.
+en windows
 
-```
-$ source .venv/bin/activate
-```
-
-If you are a Windows platform, you would activate the virtualenv like this:
-
-```
+```cmd
 % .venv\Scripts\activate.bat
 ```
 
-Once the virtualenv is activated, you can install the required dependencies.
-
-```
-$ pip install -r requirements.txt
-```
-
-At this point you can now synthesize the CloudFormation template for this code.
-
-```
-$ cdk synth
+Una vez activado instalamos las dependencias
+```zsh
+pip install -r requirements.txt
 ```
 
-To add additional dependencies, for example other CDK libraries, just add
-them to your `setup.py` file and rerun the `pip install -r requirements.txt`
-command.
+en este punto ya se puede desplegar:
 
-## Useful commands
+```zsh
+cdk deploy
+```
 
- * `cdk ls`          list all stacks in the app
- * `cdk synth`       emits the synthesized CloudFormation template
- * `cdk deploy`      deploy this stack to your default AWS account/region
- * `cdk diff`        compare deployed stack with current state
- * `cdk docs`        open CDK documentation
+y para eliminar:
+
+```zsh
+cdk destroy
+```
+
+
+## Otros comandos útiles
+
+ * `cdk synth`       crea un template de cloudformation con los recursos de este proyecto
+ * `cdk diff`        compara el stack desplegado con el nuevo estado local
 
 Enjoy!
